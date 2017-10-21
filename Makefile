@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=redsocks2
-PKG_VERSION:=0.60
-PKG_RELEASE=2
+PKG_VERSION:=0.66
+PKG_RELEASE=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/aa65535/openwrt-redsocks2/releases/download/v$(PKG_VERSION)
-PKG_MD5SUM:=b88bf23bf75fa7642f8d230db21f73b9
+PKG_SOURCE_URL:=https://github.com/mukaiu/openwrt-redsocks2/releases/download/v$(PKG_VERSION)
+# PKG_MD5SUM:=b88bf23bf75fa7642f8d230db21f73b9
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=LICENSE
