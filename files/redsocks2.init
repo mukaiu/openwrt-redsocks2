@@ -3,6 +3,7 @@
 START=90
 STOP=15
 
+USE_PROCD=1
 SERVICE_USE_PID=1
 SERVICE_WRITE_PID=1
 SERVICE_DAEMONIZE=1
@@ -20,7 +21,10 @@ get_args() {
 	config_get timeout $1 timeout
 }
 
-start_redsocks2() {
+init_config() {
+        config_load redsocks2                                                                       
+        config_foreach get_args redsocks2
+
 	mkdir -p $(dirname $CONFIG)
 	sed -e "s#|LOCAL_PORT|#$local_port#" \
 		-e "s#|PROXY_TYPE|#$proxy_type#" \
@@ -29,19 +33,13 @@ start_redsocks2() {
 		-e "s#|AUTO_PROXY|#$auto_proxy#" \
 		-e "s#|TIMEOUT|#${timeout:-5}#" \
 		$TPL >$CONFIG
-	service_start /usr/bin/redsocks2 -c $CONFIG
 }
 
-boot() {
-	start
-}
-
-start() {
-	config_load redsocks2
-	config_foreach get_args redsocks2
-	[ "$enable" = 1 ] && start_redsocks2
-}
-
-stop() {
-	service_stop /usr/bin/redsocks2
+start_service() {
+        init_config
+        
+        procd_open_instance
+        procd_set_param command /usr/bin/redsocks2 -c $CONFIG
+        procd_set_param respawn
+        procd_close_instance
 }
