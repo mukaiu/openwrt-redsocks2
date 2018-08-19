@@ -39,7 +39,7 @@ start_service() {
         init_config
         
         procd_open_instance
-        procd_set_param command /usr/bin/redsocks2 -c $CONFIG
+        procd_set_param command /usr/bin/redsocks2 -c $CONFIG -p /var/run/redsocks2.pid
         procd_set_param respawn
         procd_close_instance
 }
