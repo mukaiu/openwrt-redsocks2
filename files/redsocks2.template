@@ -7,10 +7,8 @@ base {
 }
 
 redsocks {
-	local_ip = 0.0.0.0;
-	local_port = |LOCAL_PORT|;
-	ip = |PROXY_IP|;
-	port = |PROXY_PORT|;
+	bind = "0.0.0.0:|LOCAL_PORT|";
+	relay = "|PROXY_IP|:|PROXY_PORT|";
 	type = |PROXY_TYPE|;
 	autoproxy = |AUTO_PROXY|;
 	timeout = |TIMEOUT|;
